@@ -6,7 +6,7 @@ const PrimaryButton = ({ label, width, type = 'button', onClick }) => {
             <button
                 onClick={onClick}
                 type={type}
-                className='w-full p-3 px-5 text-sm rounded tracking-wide bg-[#121212] text-white'
+                className='w-full p-3 px-5 text-sm rounded tracking-wide bg-cyan-500 text-white'
             >
                 {label}
             </button>
