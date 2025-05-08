@@ -6,7 +6,7 @@ const SecondaryButton = ({ label, width, type = 'button', onClick }) => {
             <button
                 onClick={onClick}
                 type={type}
-                className='w-full p-3 px-5 text-sm font-medium rounded tracking-wide bg-transparent border border-[#121212] text-[#121212]'
+                className='w-full p-2.5 px-5 text-sm rounded tracking-wide bg-transparent border border-[#121212] text-[#121212]'
             >
                 {label}
             </button>

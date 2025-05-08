@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import Head from 'next/head';
 import SecondaryButton from '../common/SecondaryButton';
+import PrimaryButton from '../common/PrimaryButton';
 
 
 const columns = [
@@ -23,10 +24,10 @@ const Leads = () => {
         <title>Leads</title>
       </Head>
 
-      <div className='flex items-start justify-between w-full'>
+      <div className='flex items-center justify-between w-full'>
         <h1 className='module-title'>Leads <span className=''>(100)</span></h1>
 
-        <SecondaryButton width="w-fit" label="Export"/>
+        <PrimaryButton width="w-fit" label="Export"/>
       </div>
 
 

@@ -1,7 +1,6 @@
-import React, { Fragment } from 'react';
 import Head from 'next/head';
+import React, { Fragment } from 'react';
 import PrimaryButton from '../common/PrimaryButton';
-
 
 const columns = [
   "id",
@@ -14,7 +13,6 @@ const columns = [
   "test_4",
 ]
 
-
 const Qr = () => {
   return (
     <div className='flex flex-col w-full gap-4'>
@@ -23,7 +21,7 @@ const Qr = () => {
         <title>Qr</title>
       </Head>
 
-      <div className='flex items-start justify-between w-full'>
+      <div className='flex items-center justify-between w-full'>
         <h1 className='module-title'>Qr <span className=''>(100)</span></h1>
 
         <PrimaryButton width="w-fit" label="Create New QR"/>

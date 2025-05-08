@@ -28,6 +28,11 @@ const Login = () => {
         })
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        router.push('/admin/dashboard')
+    }
+
     return (
         <div className='grid lg:grid-cols-5 w-full h-screen'>
 
@@ -35,7 +40,7 @@ const Login = () => {
 
             </div>
 
-            <form className='flex flex-col bg-white w-full h-full lg:px-10 px-4 lg:py-20 py-10 lg:col-span-2 gap-4'>
+            <form onSubmit={handleSubmit} className='flex flex-col bg-white w-full h-full lg:px-10 px-4 lg:py-20 py-10 lg:col-span-2 gap-4'>
 
                 <h1 className='lg:text-2xl text-xl font-semibold text-[#121212]'>Welcome to SAAS Application</h1>
 

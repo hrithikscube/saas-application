@@ -76,7 +76,7 @@ const Layout = ({ children }) => {
                 <div className='mt-12' />
 
                 {side_menus?.map(({ name, link }) => (
-                    <button onClick={() => router.push(link)} className={`${pathname.includes(link) ? 'bg-cyan-500 text-[#121212] rounded' : 'text-white'} p-3 text-sm  text-start w-full`}>
+                    <button onClick={() => router.push(link)} className={`${pathname.includes(link) ? 'bg-cyan-500 text-[#121212] rounded' : 'text-white'} p-2.5 text-sm  text-start w-full`}>
                         <p className='lg:block hidden'>{name}</p>
                         <p className='lg:hidden block text-center'>{name.slice(0,1)}</p>
                     </button>

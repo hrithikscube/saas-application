@@ -10,7 +10,7 @@ const Input = ({ name, value, handleChange, label, width, error, type, required 
                 value={value}
                 onChange={handleChange}
                 placeholder={label}
-                className='w-full p-3 outline-none text-sm rounded text-[#121212] border border-[#808080]/50 bg-transparent'
+                className='w-full p-2.5 outline-none tracking-normal text-sm rounded text-[#121212] border border-[#808080]/50 bg-transparent'
             />
 
             {error ? <p className='text-xs font-medium text-[#d32f2f]'>{error}</p> : ''}

@@ -30,6 +30,12 @@ const Signup = () => {
         })
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        router.push('/login')
+    }
+
+
     return (
         <div className='grid lg:grid-cols-5 w-full h-screen'>
 
@@ -37,7 +43,7 @@ const Signup = () => {
 
             </div>
 
-            <form className='flex flex-col bg-white w-full h-full lg:px-10 px-4 lg:py-20 py-10 lg:col-span-2 gap-4'>
+            <form onSubmit={handleSubmit} className='flex flex-col bg-white w-full h-full lg:px-10 px-4 lg:py-20 py-10 lg:col-span-2 gap-4'>
 
                 <h1 className='lg:text-2xl text-xl font-semibold text-[#121212]'>Welcome to SAAS Application</h1>
 
@@ -59,7 +65,7 @@ const Signup = () => {
 
                 <Input
                     required
-                    type="confirm_password"
+                    type="password"
                     name="confirm_password"
                     handleChange={handleChange}
                     label="Confirm Password"
