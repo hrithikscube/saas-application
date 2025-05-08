@@ -15,6 +15,10 @@ const side_menus = [
         name: 'QR',
         link: '/admin/qr'
     },
+    {
+        name: 'Profiles',
+        link: '/admin/profiles'
+    },
 ]
 
 
