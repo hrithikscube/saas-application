@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Input from '@/components/common/Input';
 import React, { useEffect, useState } from 'react';
@@ -51,6 +52,10 @@ const CreateNewQr = () => {
 
   return (
     <div className='flex flex-col w-full gap-4'>
+
+      <Head>
+        <title>Create Qr</title>
+      </Head>
 
       <div className='p-3 bg-slate-300 w-full rounded-md'>
         <h1 className='lg:text-base text-sm font-semibold text-[#121212]'>Create New QR</h1>

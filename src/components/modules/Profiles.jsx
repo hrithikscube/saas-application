@@ -23,7 +23,7 @@ const Profiles = () => {
       </Head>
 
       <div className='flex items-center justify-between w-full'>
-        <h1 className='module-title'>Profiles <span className=''>(20)</span></h1>
+        <h1 className='module-title'>Profiles <span className='count-text'>(20)</span></h1>
 
         <PrimaryButton width="w-fit" label="Add New Profile" />
       </div>

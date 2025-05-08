@@ -36,6 +36,6 @@ button{
 }
 
 .count-text{
-  @apply lg:text-sm text-xs text-[#121212] font-[500]
+  @apply lg:text-sm text-xs text-[#121212] font-[400]
 }
 

@@ -25,7 +25,7 @@ const Leads = () => {
       </Head>
 
       <div className='flex items-center justify-between w-full'>
-        <h1 className='module-title'>Leads <span className=''>(100)</span></h1>
+        <h1 className='module-title'>Leads <span className='count-text'>(100)</span></h1>
 
         <PrimaryButton width="w-fit" label="Export"/>
       </div>

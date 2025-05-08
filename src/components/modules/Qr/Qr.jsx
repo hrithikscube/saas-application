@@ -23,7 +23,7 @@ const Qr = () => {
       </Head>
 
       <div className='flex items-center justify-between w-full'>
-        <h1 className='module-title'>QR <span className=''>(100)</span></h1>
+        <h1 className='module-title'>QR <span className='count-text'>(100)</span></h1>
 
         <PrimaryButton onClick={()=>router.push('/admin/qr/create')} width="w-fit" label="Create New QR" />
       </div>
