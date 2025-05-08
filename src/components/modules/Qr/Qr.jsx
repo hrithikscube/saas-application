@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import React, { Fragment } from 'react';
-import PrimaryButton from '../common/PrimaryButton';
+import { useRouter } from 'next/router';
+import PrimaryButton from '../../common/PrimaryButton';
 
 const columns = [
   "id",
@@ -10,6 +11,10 @@ const columns = [
 ]
 
 const Qr = () => {
+
+  const router = useRouter()
+
+
   return (
     <div className='flex flex-col w-full gap-4'>
 
@@ -20,7 +25,7 @@ const Qr = () => {
       <div className='flex items-center justify-between w-full'>
         <h1 className='module-title'>QR <span className=''>(100)</span></h1>
 
-        <PrimaryButton width="w-fit" label="Add New QR"/>
+        <PrimaryButton onClick={()=>router.push('/admin/qr/create')} width="w-fit" label="Create New QR" />
       </div>
 
 

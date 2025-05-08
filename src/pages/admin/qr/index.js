@@ -1,5 +1,5 @@
 import React from 'react';
-import Qr from '@/components/modules/Qr';
+import Qr from '@/components/modules/Qr/Qr';
 import Layout from '@/components/common/Layout';
 
 const QrModule = () => {
