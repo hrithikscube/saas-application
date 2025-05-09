@@ -208,6 +208,8 @@ const Form = ({ id, title }) => {
 
                         <Template params={params} height="h-[550px]"/>
 
+                        <p onClick={()=>router.push(`/profiles/${id}`)} className='lg:text-sm font-medium text-xs text-blue-500 hover:underline cursor-pointer select-none'>View</p>
+
                     </div>
 
                 </div>

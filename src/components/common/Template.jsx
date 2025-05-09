@@ -2,6 +2,8 @@ import React from 'react'
 import PrimaryButton from './PrimaryButton'
 import SecondaryButton from './SecondaryButton'
 import { showToastMessage } from '@/utils/toast';
+import { IoMdContact } from "react-icons/io";
+import { FaLinkedin } from 'react-icons/fa';
 
 const Template = ({ width, height, params }) => {
 
@@ -47,10 +49,10 @@ const Template = ({ width, height, params }) => {
 
             <div className='flex flex-col p-4 bg-white rounded-lg'>
 
-                <div className='flex flex-row items-center gap-4 pb-2 border-b border-[#808080]/20'>
+                <div className='flex flex-row items-center gap-2 pb-2 border-b border-[#808080]/20'>
 
                     <div>
-                        <div className='w-10 h-10 bg-black rounded-full' />
+                        <IoMdContact className='w-8 h-8' />
                     </div>
 
                     <h3 className='lg:text-base text-sm font-semibold'>Contact Me</h3>
@@ -76,10 +78,10 @@ const Template = ({ width, height, params }) => {
 
             <div className='flex flex-col p-4 bg-white rounded-lg'>
 
-                <div className='flex flex-row items-center gap-4'>
+                <div className='flex flex-row items-center gap-2'>
 
                     <div>
-                        <div className='w-10 h-10 bg-black rounded' />
+                        <FaLinkedin className='w-8 h-8' />
                     </div>
 
                     <h3 className='lg:text-base text-sm font-semibold'>Linkedin</h3>
