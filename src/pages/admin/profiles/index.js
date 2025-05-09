@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '@/components/common/Layout';
-import Profiles from '@/components/modules/Profiles';
+import Profiles from '@/components/modules/Profiles/Profiles';
 
 const ProfilesModule = () => {
     return (

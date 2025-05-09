@@ -53,6 +53,7 @@ const Signup = () => {
                     name="email"
                     handleChange={handleChange}
                     label="Email"
+                    value={params?.email}
                 />
 
                 <Input
@@ -61,6 +62,7 @@ const Signup = () => {
                     name="password"
                     handleChange={handleChange}
                     label="Password"
+                    value={params?.password}
                 />
 
                 <Input
@@ -69,6 +71,7 @@ const Signup = () => {
                     name="confirm_password"
                     handleChange={handleChange}
                     label="Confirm Password"
+                    value={params?.confirm_password}
                 />
 
                 <PrimaryButton type="submit" label="Signup" />

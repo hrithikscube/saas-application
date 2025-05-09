@@ -1,22 +1,38 @@
-import React, { Fragment } from 'react';
 import Head from 'next/head';
-import SecondaryButton from '../common/SecondaryButton';
+import React, { Fragment, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { supabase } from '@/utils/supabase';
+import moment from 'moment';
 import PrimaryButton from '../common/PrimaryButton';
-
 
 const columns = [
   "id",
   "name",
   "phone",
   "email",
-  "test_1",
-  "test_2",
-  "test_3",
-  "test_4",
+  "source",
+  "created_at",
 ]
 
-
 const Leads = () => {
+  const router = useRouter()
+  const [leadsList, setLeadsList] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+
+  const getAllLeads = async () => {
+    setIsLoading(true)
+    let { data } = await supabase.from('my-leads').select('*')
+    setLeadsList(data)
+
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 200)
+  }
+
+  useEffect(() => {
+    getAllLeads()
+  }, [])
+
   return (
     <div className='flex flex-col w-full gap-4'>
 
@@ -25,44 +41,54 @@ const Leads = () => {
       </Head>
 
       <div className='flex items-center justify-between w-full'>
-        <h1 className='module-title'>Leads <span className='count-text'>(100)</span></h1>
+        <h1 className='module-title'>Leads <span className='count-text'>({leadsList?.length})</span></h1>
 
-        <PrimaryButton width="w-fit" label="Export"/>
+        <PrimaryButton width="w-fit" label="Export" />
       </div>
 
-
-      <div className='w-full overflow-x-auto rounded-md border border-[#808080]/20'>
-
-        <div className='flex flex-row w-full flex-shrink-0'>
-
-          {
-            columns?.map((item) => (
-              <div className='w-80 flex-shrink-0 bg-gray-200 p-4'>
-                <p className='text-xs tracking-wider text-[#121212] uppercase font-medium'>{item}</p>
-              </div>
-            ))
-          }
-
-        </div>
-
+      {
+        isLoading?
+        <p className='text-center lg:text-base text-sm'>Loading...</p>
+        :
+        <Fragment>
         {
-          [...Array(12)].map(item => (
-            <div className='flex flex-row w-full flex-shrink-0'>
-              <Fragment>
+          leadsList?.length > 0 ?
+            <div className='w-full overflow-x-auto rounded-md border border-[#808080]/20'>
+
+              <div className='flex flex-row w-full flex-shrink-0'>
+
                 {
-                  [1, 2, 3, 4, 5, 6, 7, 8]?.map((item) => (
-                    <div className='w-80 flex-shrink-0 p-3 border-t border-[#808080]/20'>
-                      <p className='text-sm text-[#121212]'>value_</p>
+                  columns?.map((item) => (
+                    <div className='w-80 flex-shrink-0 bg-gray-200 p-4'>
+                      <p className='text-xs text-[#121212] uppercase font-medium'>{item}</p>
                     </div>
                   ))
                 }
-              </Fragment>
-            </div>
-          ))
+
+              </div>
+
+              {
+                leadsList.map(leadItem => (
+                  <div className='flex flex-row w-full flex-shrink-0'>
+                    <Fragment>
+                      {
+                        columns?.map((col) => (
+                          <div className='w-80 flex-shrink-0 p-3 border-t border-[#808080]/20'>
+                            <p className='text-sm text-[#121212]'>{col !== 'created_at' ? leadItem[col] : moment(leadItem[col]).format('DD/MM/YYYY')}</p>
+                          </div>
+                        ))
+                      }
+                    </Fragment>
+                  </div>
+                ))
+              }
+
+
+            </div> :
+            <p className='text-center lg:text-base text-sm'>No Records Found!</p>
         }
-
-
-      </div>
+      </Fragment>
+      }
 
     </div>
   )

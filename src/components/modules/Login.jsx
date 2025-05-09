@@ -50,6 +50,7 @@ const Login = () => {
                     name="email"
                     handleChange={handleChange}
                     label="Email"
+                    value={params?.email}
                 />
 
                 <Input
@@ -58,6 +59,7 @@ const Login = () => {
                     name="password"
                     handleChange={handleChange}
                     label="Password"
+                    value={params?.password}
                 />
 
                 <PrimaryButton type="submit" label="Login" />

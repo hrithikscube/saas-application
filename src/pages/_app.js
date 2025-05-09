@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import { Onest } from 'next/font/google';
+import { ToastContainer } from "react-toastify";
 
 const onest = Onest({
   subsets: ['latin'],
@@ -10,6 +11,7 @@ const onest = Onest({
 export default function App({ Component, pageProps }) {
   return (
     <main className={`${onest.className}`}>
+      <ToastContainer/>
       <Component {...pageProps} />
     </main>
   );
