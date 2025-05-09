@@ -4,12 +4,15 @@ import { useRouter } from 'next/router';
 import { supabase } from '@/utils/supabase';
 import PrimaryButton from '../../common/PrimaryButton';
 import moment from 'moment';
+import ModuleLoader from '@/components/common/ModuleLoader';
+import { FaEdit } from 'react-icons/fa';
 
 const columns = [
   "id",
   "name",
   "link",
   "created_at",
+  "action"
 ]
 
 const Qr = () => {
@@ -45,47 +48,54 @@ const Qr = () => {
       </div>
 
       {
-        isLoading?
-        <p className='text-center lg:text-base text-sm'>Loading...</p>
-        :
-        <Fragment>
-        {
-          qrList?.length > 0 ?
-            <div className='w-full overflow-x-auto rounded-md border border-[#808080]/20'>
+        isLoading ?
+          <ModuleLoader />
+          :
+          <Fragment>
+            {
+              qrList?.length > 0 ?
+                <div className='w-full overflow-x-auto rounded-md border border-[#808080]/20'>
 
-              <div className='flex flex-row w-full flex-shrink-0'>
-
-                {
-                  columns?.map((item) => (
-                    <div className='w-80 flex-shrink-0 bg-gray-200 p-4'>
-                      <p className='text-xs text-[#121212] uppercase font-medium'>{item}</p>
-                    </div>
-                  ))
-                }
-
-              </div>
-
-              {
-                qrList.map(qrItem => (
                   <div className='flex flex-row w-full flex-shrink-0'>
-                    <Fragment>
-                      {
-                        columns?.map((col) => (
-                          <div className='w-80 flex-shrink-0 p-3 border-t border-[#808080]/20'>
-                            <p className='text-sm text-[#121212]'>{col !== 'created_at' ? qrItem[col] : moment(qrItem[col]).format('DD/MM/YYYY')}</p>
-                          </div>
-                        ))
-                      }
-                    </Fragment>
+
+                    {
+                      columns?.map((item) => (
+                        <div className='w-80 flex-shrink-0 bg-gray-200 p-4'>
+                          <p className='text-xs text-[#121212] uppercase font-medium'>{item}</p>
+                        </div>
+                      ))
+                    }
+
                   </div>
-                ))
-              }
+
+                  {
+                    qrList.map(qrItem => (
+                      <div className='flex flex-row w-full flex-shrink-0'>
+                        <Fragment>
+                          {
+                            columns?.map((col) => (
+                              <Fragment>
+                                {col !== 'action' ?
+                                  <div className='w-80 flex-shrink-0 p-3 border-t border-[#808080]/20'>
+                                    <p className='text-sm text-[#121212]'>{col !== 'created_at' ? qrItem[col] : moment(qrItem[col]).format('DD/MM/YYYY')}</p>
+                                  </div> :
+                                  <div className='w-80 flex-shrink-0 p-3 border-t border-[#808080]/20'>
+                                    <FaEdit onClick={() => router.push(`/admin/qr/edit/${qrItem['id']}`)} className='w-4 h-4 cursor-pointer' />
+                                  </div>
+                                }
+                              </Fragment>
+                            ))
+                          }
+                        </Fragment>
+                      </div>
+                    ))
+                  }
 
 
-            </div> :
-            <p className='text-center lg:text-base text-sm'>No Records Found!</p>
-        }
-      </Fragment>
+                </div> :
+                <p className='text-center lg:text-base text-sm'>No Records Found!</p>
+            }
+          </Fragment>
       }
 
     </div>

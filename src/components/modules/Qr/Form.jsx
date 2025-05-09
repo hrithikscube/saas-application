@@ -59,7 +59,7 @@ const Form = ({ id, title }) => {
                 return
             }
             else {
-                showToastMessage('QR was created succesfully', 'success')
+                showToastMessage('QR updated succesfully', 'success')
                 setParams(initial_states)
                 router.push('/admin/qr')
             }
@@ -77,7 +77,7 @@ const Form = ({ id, title }) => {
                 return
             }
             else {
-                showToastMessage('QR was created succesfully', 'success')
+                showToastMessage('QR created succesfully', 'success')
                 setParams(initial_states)
                 router.push('/admin/qr')
             }
@@ -113,7 +113,7 @@ const Form = ({ id, title }) => {
                 <title>{title}</title>
             </Head>
 
-            <div className='p-3 bg-slate-300 w-full rounded-md'>
+            <div className='p-3 bg-gray-300 w-full rounded-md'>
                 <h1 className='lg:text-base text-sm font-semibold text-[#121212]'>{title}</h1>
             </div>
 
@@ -161,7 +161,7 @@ const Form = ({ id, title }) => {
                 </div>
                 <div className='flex items-center justify-end gap-4 w-full'>
                     <SecondaryButton onClick={() => router.back()} type="button" width="w-fit" label="Cancel" />
-                    <PrimaryButton type="submit" width="w-fit" label="Submit" />
+                    <PrimaryButton type="submit" width="w-fit" label={id ? "Update" : "Submit"} />
                 </div>
             </form>
 

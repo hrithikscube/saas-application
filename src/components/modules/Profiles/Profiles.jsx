@@ -4,6 +4,8 @@ import PrimaryButton from '../../common/PrimaryButton';
 import { useRouter } from 'next/router';
 import { supabase } from '@/utils/supabase';
 import moment from 'moment';
+import ModuleLoader from '@/components/common/ModuleLoader';
+import { FaEdit } from 'react-icons/fa';
 
 const columns = [
   "id",
@@ -13,6 +15,7 @@ const columns = [
   "designation",
   "linkedin",
   "created_at",
+  "action"
 ]
 
 const Profiles = () => {
@@ -51,7 +54,7 @@ const Profiles = () => {
 
       {
         isLoading ?
-          <p className='text-center lg:text-base text-sm'>Loading...</p>
+          <ModuleLoader />
           :
 
           <Fragment>
@@ -78,12 +81,18 @@ const Profiles = () => {
                         <Fragment>
                           {
                             columns?.map((col) => (
-                              <div className='w-80 flex-shrink-0 p-3 border-t border-[#808080]/20'>
-                                <p className='text-sm text-[#121212]'>{col !== 'created_at' ? profileItem[col] : moment(profileItem[col]).format('DD/MM/YYYY')}</p>
-                              </div>
+                              <Fragment>
+                                {col !== 'action' ?
+                                  <div className='w-80 flex-shrink-0 p-3 border-t border-[#808080]/20'>
+                                    <p className='text-sm text-[#121212]'>{col !== 'created_at' ? profileItem[col] : moment(profileItem[col]).format('DD/MM/YYYY')}</p>
+                                  </div> :
+                                  <div className='w-80 flex-shrink-0 p-3 border-t border-[#808080]/20 flex items-center gap-4'>
+                                    <FaEdit onClick={() => router.push(`/admin/profiles/edit/${profileItem['id']}`)} className='w-4 h-4 cursor-pointer' />
+                                  </div>
+                                }
+                              </Fragment>
                             ))
                           }
-
                         </Fragment>
                       </div>
                     ))

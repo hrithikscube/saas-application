@@ -3,6 +3,7 @@ import Input from '../common/Input';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import PrimaryButton from '../common/PrimaryButton';
+import Head from 'next/head';
 
 const initial_states = {
     email: '',
@@ -38,6 +39,11 @@ const Signup = () => {
 
     return (
         <div className='grid lg:grid-cols-5 w-full h-screen'>
+
+            <Head>
+                <title>Signup</title>
+            </Head>
+
 
             <div className='lg:flex hidden flex-col bg-slate-200 w-full h-full lg:col-span-3'>
 

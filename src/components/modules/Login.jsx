@@ -3,6 +3,7 @@ import Input from '../common/Input';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import PrimaryButton from '../common/PrimaryButton';
+import Head from 'next/head';
 
 const initial_states = {
     email: '',
@@ -35,6 +36,9 @@ const Login = () => {
 
     return (
         <div className='grid lg:grid-cols-5 w-full h-screen'>
+            <Head>
+                <title>Login</title>
+            </Head>
 
             <div className='lg:flex hidden flex-col bg-slate-200 w-full h-full lg:col-span-3'>
 
@@ -64,7 +68,7 @@ const Login = () => {
 
                 <PrimaryButton type="submit" label="Login" />
 
-                <p className='lg:text-base text-sm'>Don't have an account ? Register <Link className='hover:underline' href="/signup">here</Link></p>
+                <p className='lg:text-base text-sm'>Don't have an account ? Signup <Link className='hover:underline' href="/signup">here</Link></p>
 
             </form>
 

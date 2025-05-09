@@ -1,9 +1,11 @@
+import moment from 'moment';
 import Head from 'next/head';
-import React, { Fragment, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { supabase } from '@/utils/supabase';
-import moment from 'moment';
+import ModuleLoader from '../common/ModuleLoader';
 import PrimaryButton from '../common/PrimaryButton';
+import React, { Fragment, useEffect, useState } from 'react';
+import { FaEye } from "react-icons/fa";
 
 const columns = [
   "id",
@@ -12,6 +14,7 @@ const columns = [
   "email",
   "source",
   "created_at",
+  "action"
 ]
 
 const Leads = () => {
@@ -27,6 +30,25 @@ const Leads = () => {
     setTimeout(() => {
       setIsLoading(false)
     }, 200)
+  }
+
+  const [mStates, setMStates] = useState({
+    view_lead: {
+      isOpen: false
+    }
+
+  })
+
+  const toggleOpen = (name) => {
+    let temp = { ...mStates }
+    temp[name].isOpen = true
+    setMStates(temp)
+  }
+
+  const toggleClose = (name) => {
+    let temp = { ...mStates }
+    temp[name].isOpen = true
+    setMStates(temp)
   }
 
   useEffect(() => {
@@ -47,47 +69,54 @@ const Leads = () => {
       </div>
 
       {
-        isLoading?
-        <p className='text-center lg:text-base text-sm'>Loading...</p>
-        :
-        <Fragment>
-        {
-          leadsList?.length > 0 ?
-            <div className='w-full overflow-x-auto rounded-md border border-[#808080]/20'>
+        isLoading ?
+          <ModuleLoader />
+          :
+          <Fragment>
+            {
+              leadsList?.length > 0 ?
+                <div className='w-full overflow-x-auto rounded-md border border-[#808080]/20'>
 
-              <div className='flex flex-row w-full flex-shrink-0'>
-
-                {
-                  columns?.map((item) => (
-                    <div className='w-80 flex-shrink-0 bg-gray-200 p-4'>
-                      <p className='text-xs text-[#121212] uppercase font-medium'>{item}</p>
-                    </div>
-                  ))
-                }
-
-              </div>
-
-              {
-                leadsList.map(leadItem => (
                   <div className='flex flex-row w-full flex-shrink-0'>
-                    <Fragment>
-                      {
-                        columns?.map((col) => (
-                          <div className='w-80 flex-shrink-0 p-3 border-t border-[#808080]/20'>
-                            <p className='text-sm text-[#121212]'>{col !== 'created_at' ? leadItem[col] : moment(leadItem[col]).format('DD/MM/YYYY')}</p>
-                          </div>
-                        ))
-                      }
-                    </Fragment>
+
+                    {
+                      columns?.map((item) => (
+                        <div className='w-80 flex-shrink-0 bg-gray-200 p-4'>
+                          <p className='text-xs text-[#121212] uppercase font-medium'>{item}</p>
+                        </div>
+                      ))
+                    }
+
                   </div>
-                ))
-              }
+
+                  {
+                    leadsList.map(leadItem => (
+                      <div className='flex flex-row w-full flex-shrink-0'>
+                        <Fragment>
+                          {
+                            columns?.map((col) => (
+                              <Fragment>
+                                {col !== 'action' ?
+                                  <div className='w-80 flex-shrink-0 p-3 border-t border-[#808080]/20'>
+                                    <p className='text-sm text-[#121212]'>{col !== 'created_at' ? leadItem[col] : moment(leadItem[col]).format('DD/MM/YYYY')}</p>
+                                  </div> :
+                                  <div className='w-80 flex-shrink-0 p-3 border-t border-[#808080]/20'>
+                                    <FaEye onClick={() => toggleOpen('view_lead')} className='w-4 h-4 cursor-pointer' />
+                                  </div>
+                                }
+                              </Fragment>
+                            ))
+                          }
+                        </Fragment>
+                      </div>
+                    ))
+                  }
 
 
-            </div> :
-            <p className='text-center lg:text-base text-sm'>No Records Found!</p>
-        }
-      </Fragment>
+                </div> :
+                <p className='text-center lg:text-base text-sm'>No Records Found!</p>
+            }
+          </Fragment>
       }
 
     </div>
