@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PrimaryButton from './PrimaryButton'
+import { FaLinkedin } from 'react-icons/fa';
+import { IoMdContact } from "react-icons/io";
 import SecondaryButton from './SecondaryButton'
 import { showToastMessage } from '@/utils/toast';
-import { IoMdContact } from "react-icons/io";
-import { FaLinkedin } from 'react-icons/fa';
 
 const Template = ({ width, height, params }) => {
+
+    const [enqModal, setEnqModal] = useState(false)
+
+    const openEnquiryModal = () => {
+        setLeadModal(true)
+    }
+
+    const closeEnquiryModal = () => {
+        setLeadModal(false)
+    }
 
     function downloadVCard() {
         if (params?.name !== '' && params?.phone !== '' && params?.email !== '') {
@@ -36,7 +46,7 @@ const Template = ({ width, height, params }) => {
     }
 
     return (
-        <div className={`${width || 'lg:w-80'} w-full mx-auto ${height || 'h-[550px]'} bg-[#121212] flex flex-col overflow-y-auto p-4 gap-4`}>
+        <div className={`${width || 'lg:w-80'} relative w-full mx-auto ${height || 'h-[550px]'} bg-[#121212] flex flex-col overflow-y-auto p-4 gap-4`}>
 
             <div>
                 <h2 className='lg:text-lg text-base text-white font-semibold'>{params?.name || "Name"}</h2>
