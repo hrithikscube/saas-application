@@ -148,10 +148,10 @@ const Form = ({ id, title }) => {
             </div>
 
 
-            <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+            <div className='flex flex-col gap-4'>
                 <div className='grid lg:grid-cols-2 items-start gap-4 w-full lg:p-6 p-4 bg-white border border-[#808080]/20 rounded-md'>
 
-                    <div className='flex flex-col gap-4 w-full'>
+                    <form onSubmit={handleSubmit} className='flex flex-col gap-4 w-full'>
 
                         <h2 className='lg:text-base text-sm text-[#121212] font-medium'>Basic Information</h2>
 
@@ -199,26 +199,28 @@ const Form = ({ id, title }) => {
                             handleChange={handleChange}
                             label="Linkedin"
                         />
-                    </div>
 
+                        <div className='flex items-center justify-end gap-4 w-full'>
+                            <SecondaryButton onClick={() => router.back()} type="button" width="w-fit" label="Cancel" />
+                            <PrimaryButton type="submit" width="w-fit" label={id ? "Update" : "Submit"} />
+                        </div>
+                        
+                    </form>
 
                     <div className='flex flex-col w-full gap-4 items-center'>
 
                         <h2 className='lg:text-base text-sm text-[#121212] font-medium'>Preview</h2>
 
-                        <Template params={params} height="h-[550px]"/>
+                        <Template params={params} height="h-[550px]" />
 
-                        <p onClick={()=>router.push(`/profiles/${id}`)} className='lg:text-sm font-medium text-xs text-blue-500 hover:underline cursor-pointer select-none'>View</p>
+                        <p onClick={() => router.push(`/profiles/${id}`)} className='lg:text-sm font-medium text-xs text-blue-500 hover:underline cursor-pointer select-none'>View</p>
 
                     </div>
 
                 </div>
 
-                <div className='flex items-center justify-end gap-4 w-full'>
-                    <SecondaryButton onClick={() => router.back()} type="button" width="w-fit" label="Cancel" />
-                    <PrimaryButton type="submit" width="w-fit" label={id ? "Update" : "Submit"} />
-                </div>
-            </form>
+
+            </div>
 
         </div>
     )

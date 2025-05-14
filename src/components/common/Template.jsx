@@ -1,20 +1,39 @@
 import React, { useState } from 'react'
 import PrimaryButton from './PrimaryButton'
 import { FaLinkedin } from 'react-icons/fa';
-import { IoMdContact } from "react-icons/io";
+import { IoIosCloseCircleOutline, IoMdContact } from "react-icons/io";
 import SecondaryButton from './SecondaryButton'
 import { showToastMessage } from '@/utils/toast';
+import Input from './Input';
+import { supabase } from '@/utils/supabase';
 
 const Template = ({ width, height, params }) => {
 
-    const [enqModal, setEnqModal] = useState(false)
+    const initial_fields = {
+        name: '',
+        phone: '',
+        email: '',
+        source: ''
+    }
+
+    const [fields, setFields] = useState(initial_fields)
+
+    const handleChange = (e) => {
+        let { name, value } = e.target
+        setFields({
+            ...fields,
+            [name]: value
+        })
+    }
+
+    const [enquiryModal, setEnquiryModal] = useState(false)
 
     const openEnquiryModal = () => {
-        setLeadModal(true)
+        setEnquiryModal(true)
     }
 
     const closeEnquiryModal = () => {
-        setLeadModal(false)
+        setEnquiryModal(false)
     }
 
     function downloadVCard() {
@@ -45,8 +64,75 @@ const Template = ({ width, height, params }) => {
         }
     }
 
+    const handleSubmit = async (e) => {
+
+        e.preventDefault();
+
+        const { data, error } = await supabase
+            .from('my-leads')
+            .insert([
+                { name: fields?.name, phone: fields?.phone, email: fields?.email, source: params?.name },
+            ])
+            .select()
+
+        if (error) {
+            showToastMessage(error?.message || 'Something went wrong', 'error')
+            return
+        }
+        else {
+            showToastMessage('Your response is captured', 'success')
+            setFields(initial_fields)
+            closeEnquiryModal()
+        }
+
+    }
+
     return (
         <div className={`${width || 'lg:w-80'} relative w-full mx-auto ${height || 'h-[550px]'} bg-[#121212] flex flex-col overflow-y-auto p-4 gap-4`}>
+
+            {
+                enquiryModal ?
+                    <div className='w-full h-full absolute bg-black/50 top-0 left-0 p-3 flex items-center justify-center'>
+
+                        <form onSubmit={(e) => handleSubmit(e)} className='flex flex-col w-full bg-white rounded-xl gap-4 px-5 py-6 relative z-[10]'>
+
+                            <div onClick={closeEnquiryModal} className='absolute top-4 right-4 cursor-pointer'>
+                                <IoIosCloseCircleOutline className='w-5 h-5' />
+                            </div>
+
+                            <h1 className='lg:text-lg text-base font-semibold'>Get in Touch</h1>
+
+                            <Input
+                                required
+                                name="name"
+                                value={fields?.name}
+                                handleChange={handleChange}
+                                label="Name"
+                            />
+
+                            <Input
+                                type="number"
+                                required
+                                name="phone"
+                                value={fields?.phone}
+                                handleChange={handleChange}
+                                label="Phone"
+                            />
+
+                            <Input
+                                type="email"
+                                required
+                                name="email"
+                                value={fields?.email}
+                                handleChange={handleChange}
+                                label="Email"
+                            />
+
+                            <PrimaryButton type="submit" label="Submit" />
+                        </form>
+
+                    </div> : ''
+            }
 
             <div>
                 <h2 className='lg:text-lg text-base text-white font-semibold'>{params?.name || "Name"}</h2>
@@ -100,8 +186,8 @@ const Template = ({ width, height, params }) => {
 
             </div>
 
-            <PrimaryButton label="Get in touch" />
-            <SecondaryButton onClick={downloadVCard} width="w-full invert" label="Save Contact" />
+            <PrimaryButton type="button" onClick={openEnquiryModal} label="Get in touch" />
+            <SecondaryButton type="button" onClick={downloadVCard} width="w-full invert" label="Save Contact" />
 
         </div>
     )
