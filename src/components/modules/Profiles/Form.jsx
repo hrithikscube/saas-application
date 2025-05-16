@@ -204,7 +204,7 @@ const Form = ({ id, title }) => {
                             <SecondaryButton onClick={() => router.back()} type="button" width="w-fit" label="Cancel" />
                             <PrimaryButton type="submit" width="w-fit" label={id ? "Update" : "Submit"} />
                         </div>
-                        
+
                     </form>
 
                     <div className='flex flex-col w-full gap-4 items-center'>

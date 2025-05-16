@@ -1,6 +1,7 @@
 import { supabase } from '@/utils/supabase';
 import React, { useEffect, useState } from 'react';
 import Template from '@/components/common/Template';
+import Head from 'next/head';
 
 const ProfileLanding = ({ id }) => {
 
@@ -40,6 +41,9 @@ const ProfileLanding = ({ id }) => {
 
   return (
     <div className='flex flex-col w-full h-screen items-center justify-center'>
+      <Head>
+        <title>{params?.name} | {params?.designation}</title>
+      </Head>
       <Template params={params} width="lg:w-96" height="h-full" />
     </div>
   )

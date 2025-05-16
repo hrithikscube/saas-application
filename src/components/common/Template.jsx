@@ -88,7 +88,7 @@ const Template = ({ width, height, params }) => {
     }
 
     return (
-        <div className={`${width || 'lg:w-80'} relative w-full mx-auto ${height || 'h-[550px]'} bg-[#121212] flex flex-col overflow-y-auto p-4 gap-4`}>
+        <div className={`${width || 'lg:w-80'} relative w-full mx-auto ${height || 'h-[550px]'} bg-[#121212] flex flex-col overflow-y-auto lg:p-6 p-4 gap-4`}>
 
             {
                 enquiryModal ?
