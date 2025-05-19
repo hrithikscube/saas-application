@@ -51,3 +51,10 @@ button{
   @apply lg:text-sm text-xs text-[#121212] font-[400]
 }
 
+ul{
+  @apply list-disc text-[#121212]
+}
+
+li button{
+  @apply bg-cyan-600 text-white p-2 px-4 w-fit text-sm mt-2
+}
