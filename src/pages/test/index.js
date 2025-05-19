@@ -299,7 +299,7 @@ const Test = () => {
                     value={params?.file_name}
                     handleChange={handleChange}
                     label="Enter file/folder name"
-                    width="w-96"
+                    width="lg:w-96 w-full"
                 />
 
                 <ul>{renderTree(tree)}</ul>
