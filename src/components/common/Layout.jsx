@@ -19,6 +19,10 @@ const side_menus = [
         name: 'Profiles',
         link: '/admin/profiles'
     },
+    {
+        name: 'My Users',
+        link: '/admin/my-users'
+    },
 ]
 
 
