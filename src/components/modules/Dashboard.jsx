@@ -35,7 +35,7 @@ const Dashboard = () => {
 
           {
             stats?.map(({ name, value }) => (
-              <div className='py-2 px-2.5 w-1/3 flex-shrink-0 h-60'>
+              <div className='py-2 px-2.5 lg:w-1/3 w-full flex-shrink-0 h-60'>
                 <div className='w-full h-full flex-shrink-0 bg-white flex flex-col justify-between lg:rounded-2xl rounded-lg lg:p-6 p-4'>
                   <h2 className='lg:text-base text-sm font-semibold'>{name}</h2>
                   

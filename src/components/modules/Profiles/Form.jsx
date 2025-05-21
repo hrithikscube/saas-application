@@ -207,7 +207,7 @@ const Form = ({ id, title }) => {
 
                     </form>
 
-                    <div className='flex flex-col w-full gap-4 items-center'>
+                    <div className='flex flex-col lg:w-full md:w-80 w-full mx-auto gap-4 items-center'>
 
                         <h2 className='lg:text-base text-sm text-[#121212] font-medium'>Preview</h2>
 

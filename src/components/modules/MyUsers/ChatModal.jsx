@@ -80,9 +80,9 @@ const ChatModal = ({ id, open, usersList, handleClose }) => {
 
     if (JSON.stringify(activeDetails) !== '{}') {
         return (
-            <div className='w-full h-full absolute bg-black/50 top-0 left-0 flex items-center justify-center'>
+            <div className='w-full h-full absolute bg-black/50 top-0 left-0 flex items-center justify-center p-4'>
 
-                <div className='lg:w-96 mx-auto bg-white flex flex-col'>
+                <div className='lg:w-96 w-full mx-auto bg-white flex flex-col'>
                     <div className='p-4 bg-cyan-600 flex items-center justify-between'>
 
                         <div className='flex items-center gap-2'>
@@ -128,8 +128,8 @@ const ChatModal = ({ id, open, usersList, handleClose }) => {
     }
 
     return (
-        <div className='w-full h-full absolute bg-black/50 top-0 left-0 flex items-center justify-center'>
-            <div className='lg:w-96 mx-auto bg-white flex flex-col'>
+        <div className='w-full h-full absolute bg-black/50 top-0 left-0 flex items-center justify-center p-4'>
+            <div className='lg:w-96 w-full mx-auto bg-white flex flex-col'>
 
                 <div className='p-4 bg-cyan-600 flex items-center justify-between gap-2 relative'>
                     <h1 className='lg:text-lg text-base font-medium  text-white'>All Conversations</h1>

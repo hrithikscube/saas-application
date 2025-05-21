@@ -97,7 +97,7 @@ const Layout = ({ children }) => {
                 <div className='h-12 w-full bg-[#121212] px-4 flex flex-row items-center justify-end'>
 
                     <div className='relative min-w-32'>
-                        <p onClick={() => toggleOpenClose('logout_options')} className='lg:text-sm text-xs cursor-pointer select-none text-white font-medium text-end w-full'>Hello, User</p>
+                        <p onClick={() => toggleOpenClose('logout_options')} className='text-sm cursor-pointer select-none text-white font-medium text-end w-full'>Hello, User</p>
 
                         {
                             mStates?.logout_options?.isOpen ?
