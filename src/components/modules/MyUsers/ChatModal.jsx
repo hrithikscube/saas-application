@@ -39,13 +39,48 @@ const ChatModal = ({ id, open, usersList, handleClose }) => {
             .select('*')
             .eq('conversation_id', '1'); // Replace '1' with the actual UUID string
 
-        setConversations(data)
         if (error) {
             console.error('Error fetching messages:', error);
         } else {
             console.log('Messages:', data);
+            setConversations(data)
         }
     };
+
+    useEffect(() => {
+        if (open && JSON.stringify(activeDetails) !== '{}') {
+            // Initial fetch
+            getConversations()
+
+            // Subscribe to realtime messages
+            const channel = supabase
+                .channel('realtime-messages')
+                .on(
+                    'postgres_changes',
+                    {
+                        event: '*',
+                        schema: 'public',
+                        table: 'messages',
+                        filter: `conversation_id=eq.${'1'}`,
+                    },
+                    (payload) => {
+                        console.log('Realtime message received:', payload)
+
+                        if (payload.eventType === 'INSERT') {
+                            setConversations((prev) => [...prev, payload.new])
+                        }
+
+                        // Optionally handle UPDATE and DELETE
+                    }
+                )
+                .subscribe()
+
+            // Cleanup on unmount
+            return () => {
+                supabase.removeChannel(channel)
+            }
+        }
+    }, [open, activeDetails])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -62,17 +97,17 @@ const ChatModal = ({ id, open, usersList, handleClose }) => {
             return
         }
         else {
-            getConversations()
+            // getConversations()
             setParams(initial_states)
         }
 
     }
 
-    useEffect(() => {
-        if (open && JSON.stringify(activeDetails) !== '{}') {
-            getConversations()
-        }
-    }, [open, activeDetails])
+    // useEffect(() => {
+    //     if (open && JSON.stringify(activeDetails) !== '{}') {
+    //         getConversations()
+    //     }
+    // }, [open, activeDetails])
 
     if (!open) {
         return
@@ -80,7 +115,7 @@ const ChatModal = ({ id, open, usersList, handleClose }) => {
 
     if (JSON.stringify(activeDetails) !== '{}') {
         return (
-            <div className='w-full h-full absolute bg-black/50 top-0 left-0 flex items-center justify-center p-4'>
+            <div className='w-full h-full absolute bg-black/20 top-0 left-0 flex items-center justify-center p-4'>
 
                 <div className='lg:w-96 w-full mx-auto bg-white flex flex-col'>
                     <div className='p-4 bg-cyan-600 flex items-center justify-between'>
@@ -128,7 +163,7 @@ const ChatModal = ({ id, open, usersList, handleClose }) => {
     }
 
     return (
-        <div className='w-full h-full absolute bg-black/50 top-0 left-0 flex items-center justify-center p-4'>
+        <div className='w-full h-full absolute bg-black/20 top-0 left-0 flex items-center justify-center p-4'>
             <div className='lg:w-96 w-full mx-auto bg-white flex flex-col'>
 
                 <div className='p-4 bg-cyan-600 flex items-center justify-between gap-2 relative'>
